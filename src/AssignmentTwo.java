@@ -6,6 +6,7 @@ public class AssignmentTwo {
         a2.partFourA();
         a2.partFourB();
         a2.partFive();
+        a2.partSix();
     }
 
     public void partThree() {
@@ -107,7 +108,25 @@ public class AssignmentTwo {
 
 
     public void partSix() {
+        Employee operator = new Employee("Lara", 31, "999-9999", "EMP005", "Operator");
+        Ride ride = new Ride("HyperTwist", 110, operator, 3); // Ride allows 3 per cycle
+
+        Visitor v1 = new Visitor("Max", 19, "555-0001", "HX001", false);
+        Visitor v2 = new Visitor("Sophie", 21, "555-0002", "HX002", true);
+        Visitor v3 = new Visitor("Leo", 22, "555-0003", "HX003", false);
+        Visitor v4 = new Visitor("Nora", 23, "555-0004", "HX004", true);
+        Visitor v5 = new Visitor("Zack", 20, "555-0005", "HX005", false);
+
+        ride.addVisitorToHistory(v1);
+        ride.addVisitorToHistory(v2);
+        ride.addVisitorToHistory(v3);
+        ride.addVisitorToHistory(v4);
+        ride.addVisitorToHistory(v5);
+
+        // Export ride history to file
+        ride.exportRideHistory("ride_history.csv");
     }
+
 
     public void partSeven() {
     }

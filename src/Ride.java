@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Ride implements RideInterface {
     private String rideName;
@@ -147,4 +151,28 @@ public class Ride implements RideInterface {
         Collections.sort(rideHistory, comparator);
         System.out.println("Ride history sorted.");
     }
+
+    public void exportRideHistory(String fileName) {
+        if (rideHistory.isEmpty()) {
+            System.out.println("No ride history to export.");
+            return;
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (Visitor visitor : rideHistory) {
+                // Format: name,age,contactNumber,ticketNumber,hasMembership
+                String line = visitor.getName() + "," +
+                            visitor.getAge() + "," +
+                            visitor.getContactNumber() + "," +
+                            visitor.getTicketNumber() + "," +
+                            visitor.isHasMembership();
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("Ride history exported successfully to " + fileName);
+        } catch (IOException e) {
+            System.out.println("Error exporting ride history: " + e.getMessage());
+        }
+    }
+
 }
