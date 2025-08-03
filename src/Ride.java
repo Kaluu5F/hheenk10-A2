@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -174,5 +177,38 @@ public class Ride implements RideInterface {
             System.out.println("Error exporting ride history: " + e.getMessage());
         }
     }
+
+    public void importRideHistory(String fileName) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        String line;
+        int count = 0;
+
+        while ((line = reader.readLine()) != null) {
+            String[] fields = line.split(",");
+            if (fields.length == 5) {
+                String name = fields[0];
+                int age = Integer.parseInt(fields[1]);
+                String contact = fields[2];
+                String ticket = fields[3];
+                boolean hasMembership = Boolean.parseBoolean(fields[4]);
+
+                Visitor visitor = new Visitor(name, age, contact, ticket, hasMembership);
+                rideHistory.add(visitor);
+                count++;
+            } else {
+                System.out.println("Invalid data format: " + line);
+            }
+        }
+
+        System.out.println("Successfully imported " + count + " visitors from file.");
+    } catch (FileNotFoundException e) {
+        System.out.println("File not found: " + fileName);
+    } catch (IOException e) {
+        System.out.println("Error reading from file: " + e.getMessage());
+    } catch (NumberFormatException e) {
+        System.out.println("Error parsing numeric data: " + e.getMessage());
+    }
+}
+
 
 }

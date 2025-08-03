@@ -7,6 +7,7 @@ public class AssignmentTwo {
         a2.partFourB();
         a2.partFive();
         a2.partSix();
+        a2.partSeven();
     }
 
     public void partThree() {
@@ -129,5 +130,16 @@ public class AssignmentTwo {
 
 
     public void partSeven() {
+      Employee operator = new Employee("Omar", 30, "123123123", "EMP006", "Ride Supervisor");
+      Ride ride = new Ride("Gravity Rush", 130, operator, 5);
+
+       ride.importRideHistory("ride_history.csv");
+
+       System.out.println("\n--- Number of visitors imported ---");
+       System.out.println("Total: " + ride.numberOfVisitors());
+
+       System.out.println("\n--- Visitors from imported ride history ---");
+       ride.printRideHistory();
     }
+
 }
