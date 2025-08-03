@@ -3,6 +3,7 @@ public class Person {
     private int age;
     private String contactNumber;
 
+    //Default constructor
     public Person() {
     }
 

@@ -29,6 +29,8 @@ public class Ride implements RideInterface {
         this.maxRider = 1;
     }
 
+
+    //parameterized constructors
     public Ride(String rideName, int minHeightRequirement, Employee rideOperator) {
         this.rideName = rideName;
         this.minHeightRequirement = minHeightRequirement;
@@ -124,6 +126,7 @@ public class Ride implements RideInterface {
 
     @Override
     public void runOneCycle() {
+        //validation check
         if (rideOperator == null) {
             System.out.println("Ride cannot run: No operator assigned.");
             return;
